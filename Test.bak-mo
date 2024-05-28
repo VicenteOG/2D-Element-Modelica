@@ -1,0 +1,23 @@
+within Components_v4;
+
+model Test
+BoundaryInlet boundaryInlet(m_dot = 0.05)  annotation(
+    Placement(transformation(origin = {0, -62}, extent = {{-10, -10}, {10, 10}})));
+BoundaryOutlet boundaryOutlet annotation(
+    Placement(transformation(origin = {0, 60}, extent = {{-10, 10}, {10, -10}}, rotation = -0)));
+BoundarySide boundarySide_r annotation(
+    Placement(transformation(origin = {80, 0}, extent = {{-10, -10}, {10, 10}})));
+BoundarySide boundarySide_l annotation(
+    Placement(transformation(origin = {-80, 0}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
+BasicElement basicElement(m_dot_c(start = 0.05))  annotation(
+    Placement(transformation(origin = {-40, 0}, extent = {{-10, -10}, {10, 10}})));
+equation
+connect(basicElement.west, boundarySide_l.west) annotation(
+    Line(points = {{-50, 0}, {-70, 0}}));
+connect(basicElement.north, boundaryOutlet.south) annotation(
+    Line(points = {{-40, 10}, {-40, 40}, {0, 40}, {0, 50}}));
+connect(basicElement.east, boundarySide_r.west) annotation(
+    Line(points = {{-30, 0}, {70, 0}}));
+connect(boundaryInlet.north, basicElement.south) annotation(
+    Line(points = {{0, -52}, {0, -20}, {-40, -20}, {-40, -10}}));
+end Test;

@@ -1,0 +1,11 @@
+within Components_v4;
+
+connector Port
+      import Un = AlkalineElectrolysis.Units;
+      Un.Pressure p;
+      flow Un.MassFlow m;
+      stream Un.Concentration c;
+      annotation(
+        Icon(graphics = {Ellipse(fillColor = {0, 0, 255}, fillPattern = FillPattern.Solid, extent = {{-50, 50}, {50, -50}})}),
+        Diagram(graphics = {Ellipse(fillColor = {0, 0, 255}, fillPattern = FillPattern.Solid, extent = {{-50, 50}, {50, -50}})}));
+    end Port;

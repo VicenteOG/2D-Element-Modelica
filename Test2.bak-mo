@@ -1,0 +1,31 @@
+within Components_v4;
+
+model Test2
+BoundaryInlet boundaryInlet(m_dot = 0.05)  annotation(
+    Placement(transformation(origin = {0, -62}, extent = {{-10, -10}, {10, 10}})));
+BoundaryOutlet boundaryOutlet annotation(
+    Placement(transformation(origin = {0, 60}, extent = {{-10, 10}, {10, -10}}, rotation = -0)));
+BoundarySide boundarySide_r annotation(
+    Placement(transformation(origin = {80, 0}, extent = {{-10, -10}, {10, 10}})));
+BoundarySide boundarySide_l annotation(
+    Placement(transformation(origin = {-80, 0}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
+BasicElement basicElement(m_cv(fixed = true), m_dot_c(start = 0.025))  annotation(
+    Placement(transformation(origin = {-40, 0}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
+BasicElement basicElement1(m_cv(fixed = true), m_dot_c(start = 0.025))  annotation(
+    Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = -0)));
+equation
+  connect(basicElement.north, boundaryOutlet.south) annotation(
+    Line(points = {{-40, 10}, {-40, 40}, {0, 40}, {0, 50}}));
+  connect(basicElement1.north, boundaryOutlet.south) annotation(
+    Line(points = {{0, 10}, {0, 50}}));
+  connect(boundaryInlet.north, basicElement1.south) annotation(
+    Line(points = {{0, -52}, {0, -10}}));
+  connect(boundaryInlet.north, basicElement.south) annotation(
+    Line(points = {{0, -52}, {0, -40}, {-40, -40}, {-40, -10}}));
+connect(basicElement.east, boundarySide_l.west) annotation(
+    Line(points = {{-50, 0}, {-70, 0}}));
+connect(basicElement1.east, basicElement.west) annotation(
+    Line(points = {{-10, 0}, {-30, 0}}));
+connect(basicElement1.west, boundarySide_r.west) annotation(
+    Line(points = {{10, 0}, {70, 0}}));
+end Test2;
